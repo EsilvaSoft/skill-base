@@ -1,0 +1,6 @@
+interface:
+  display_name: "Orquestrar execução"
+  short_description: "Coordena entregas e integra trabalho verificado"
+  default_prompt: "Use $skill-base-orquestrar-execucao para executar ou retomar o backlog dentro do escopo solicitado."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Propor respostas"
+  short_description: "Recomendações documentais para revisão"
+  default_prompt: "Use $skill-base-propor-respostas para preparar recomendações às pendências selecionadas."
+policy:
+  allow_implicit_invocation: true

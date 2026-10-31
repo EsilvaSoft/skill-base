@@ -1,0 +1,6 @@
+interface:
+  display_name: "Escrever pendências"
+  short_description: "Lacunas de requisitos com fontes e impactos"
+  default_prompt: "Use $skill-base-escrever-pendencias para registrar as perguntas residuais deste escopo."
+policy:
+  allow_implicit_invocation: true

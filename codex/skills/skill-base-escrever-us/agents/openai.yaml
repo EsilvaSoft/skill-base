@@ -1,0 +1,6 @@
+interface:
+  display_name: "Escrever User Stories"
+  short_description: "Histórias com valor e critérios verificáveis"
+  default_prompt: "Use $skill-base-escrever-us para escrever ou refinar as histórias solicitadas."
+policy:
+  allow_implicit_invocation: true

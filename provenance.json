@@ -1,0 +1,27 @@
+{
+  "repository": "https://github.com/EsilvaSoft/Xenogenesis",
+  "checkout_head": "b6a33a2bb5adb4f4ba43df416b1362f16f4fa1ad",
+  "source_files_sha256": {
+    ".agents/skills/xenogenesis-escrever-us/agents/openai.yaml": "8fdc6f1b2b4a3be75a2940ba04bcc54231614769548d49e23cec6b368363e93c",
+    ".agents/skills/xenogenesis-escrever-us/assets/modelo-us.md": "9e9fac438a78012065ea1407634bceb48a19a70c49b258568e0caff9326d4eea",
+    ".agents/skills/xenogenesis-escrever-us/SKILL.md": "4e8bd04a7212e7a3f3cc9a3d4eb08729330a1578b00a4d4a60aa113eb6c1eeac",
+    ".agents/skills/xenogenesis-escrever-task/agents/openai.yaml": "338cd24f9497ec29b85a99872412a96f31b1cd18ebcd73f83651a065b13deb43",
+    ".agents/skills/xenogenesis-escrever-task/assets/modelo-task.md": "6c53dc3e00d4ca8a3d0a3a3ab625ed6c00b447b222855150ef9354908099584a",
+    ".agents/skills/xenogenesis-escrever-task/SKILL.md": "f1b848be837c95e5eb93925d39453331b86fe2b48cc841db1d32f76e4d332d22",
+    ".agents/skills/xenogenesis-escrever-pendencias/agents/openai.yaml": "fd60ee24ff56e5cfd0be7eebbf9c79ff5bd7409526c2c7cadde2977d4e08e15e",
+    ".agents/skills/xenogenesis-escrever-pendencias/assets/modelo-pendencia.md": "b4983f7b252c57c29518b03a2f00c28e5082217de268bd19b73773c1b046d978",
+    ".agents/skills/xenogenesis-escrever-pendencias/SKILL.md": "5349b9005e420b6af35d3c5c9e1c9aa3c32cbe12f4f8a47d80ffd4817d15726b",
+    ".agents/skills/xenogenesis-propor-respostas/agents/openai.yaml": "73f8b5417773dca9abd5c0b332255f58cc811f12f9dadece224c85208c82bd1d",
+    ".agents/skills/xenogenesis-propor-respostas/assets/modelo-respostas.md": "6a4877b93bb5e3f178be2e2b56d63d4393a2a6cb58d84fd8073a57877fc1a03a",
+    ".agents/skills/xenogenesis-propor-respostas/SKILL.md": "98d2de235b3b966bdd1f5be75586746223cb215706507fbd9b29ef36c550df38",
+    ".agents/skills/xenogenesis-aplicar-respostas/agents/openai.yaml": "c91fca3b36a2b0d2a0b910c1ee09cd7730d682abe851922e08ae45e7e8f1c7b6",
+    ".agents/skills/xenogenesis-aplicar-respostas/assets/matriz-incidencia.md": "7018e080a8c6b29999ecee7c5e6192bdfb2711118b688c5126e58ab4ba71fef8",
+    ".agents/skills/xenogenesis-aplicar-respostas/assets/modelo-registro-aplicacao.md": "20e6a7ec71dbfe0ac4187b403d0ce4a2204b071c74762831ab4f1448096f2671",
+    ".agents/skills/xenogenesis-aplicar-respostas/references/orquestracao-documental.md": "7831b9959fbf5556553872d8d948550ff50013b17d89ae43d7dc7323b385c3ee",
+    ".agents/skills/xenogenesis-aplicar-respostas/SKILL.md": "b41522992171ba9682843a30e8a7ad338447f51353ddf553a567d737b4b65256",
+    ".agents/skills/xenogenesis-orquestrar-execucao/agents/openai.yaml": "a484c18115e2b3b3fae0c38edc53ebf0d06f6d8846577b03f4f49a187fec21bc",
+    ".agents/skills/xenogenesis-orquestrar-execucao/assets/atribuicao.md": "c8640cdfe75c64a297e83796b763dae61346b070f761f2765cb3eeb5e00973f9",
+    ".agents/skills/xenogenesis-orquestrar-execucao/references/worktrees.md": "4d78b5ace1b28288dcdff6d0d4822627ec8f16b9e7bc53cfc02ea0b2e3813ca9",
+    ".agents/skills/xenogenesis-orquestrar-execucao/SKILL.md": "54e75647fa1dd744af62ae0988dd905733d6b3bda7c9cc023e8f6ea406a596af"
+  }
+}

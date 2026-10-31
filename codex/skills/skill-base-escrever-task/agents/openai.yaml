@@ -1,0 +1,6 @@
+interface:
+  display_name: "Escrever Tasks"
+  short_description: "Entregas técnicas com dependências e aceite"
+  default_prompt: "Use $skill-base-escrever-task para especificar ou decompor as Tasks solicitadas."
+policy:
+  allow_implicit_invocation: true

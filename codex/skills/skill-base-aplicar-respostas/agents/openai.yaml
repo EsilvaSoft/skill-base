@@ -1,0 +1,6 @@
+interface:
+  display_name: "Aplicar respostas"
+  short_description: "Integra decisões e preserva perguntas residuais"
+  default_prompt: "Use $skill-base-aplicar-respostas para incorporar os trechos autorizados deste lote na documentação."
+policy:
+  allow_implicit_invocation: true
