@@ -30,4 +30,12 @@ O workflow confere a tag contra `VERSION`, executa os testes em Windows/Linux e 
 
 Uma release já publicada nunca é substituída pelo workflow. Em caso de falha durante o upload, o rascunho fica para inspeção; remova apenas o rascunho incompleto antes de repetir o job. Uma correção em conteúdo já publicado exige nova versão e nova tag. Não mova tags publicadas.
 
+Se uma falha na infraestrutura do workflow impedir a publicação antes de criar a release, corrija o workflow na branch padrão e use a execução manual **Validate and release**, informando a tag existente. A execução usa o workflow corrigido, mas faz checkout e valida o conteúdo da tag solicitada, sem movê-la:
+
+```sh
+gh workflow run ci.yml --ref master -f tag=v0.1.0
+```
+
+Substitua `master` pela branch padrão efetiva do repositório. A execução manual mantém as mesmas verificações de versão, testes Windows/Linux e recusa de releases existentes.
+
 O destino é obtido de `GITHUB_REPOSITORY`; o endereço documentado é `EsilvaSoft/skill-base`. A criação do remoto e o primeiro push são operações do mantenedor, separadas da implementação local.
