@@ -1,5 +1,10 @@
 # Changelog
 
+## Não lançado
+
+- Removidos o workflow de publicação, os gatilhos por tags e as regras de correspondência entre tag e versão.
+- CI mantido para validação, testes e empacotamento, com geração local dos pacotes.
+
 ## 0.1.0
 
 - Catálogo inicial de seis skills para análise e desenvolvimento de software no Codex.

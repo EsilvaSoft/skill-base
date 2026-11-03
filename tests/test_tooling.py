@@ -1,4 +1,4 @@
-"""Observable release, validation and installation behavior; all writes are isolated."""
+"""Observable packaging, validation and installation behavior; all writes are isolated."""
 
 from __future__ import annotations
 
@@ -25,14 +25,14 @@ installer = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(installer)
 
 
-class ReleaseTests(unittest.TestCase):
+class PackageTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.workspace = tempfile.TemporaryDirectory(prefix="skill-base-tests-", dir=TEMP_ROOT)
         cls.base = Path(cls.workspace.name)
-        cls.output = cls.base / "release"
+        cls.output = cls.base / "packages"
         cls.version = catalog.read_version(ROOT)
-        cls.paths = catalog.build(ROOT, cls.output, "v" + cls.version)
+        cls.paths = catalog.build(ROOT, cls.output)
         cls.archive = cls.output / f"skill-base-codex-v{cls.version}.zip"
 
     @classmethod
@@ -80,7 +80,7 @@ class ReleaseTests(unittest.TestCase):
             self.assertEqual(hashlib.sha256((self.output / name).read_bytes()).hexdigest(), expected)
 
     def test_repeated_build_is_identical(self):
-        second = catalog.build(ROOT, self.folder / "second", "v" + self.version)
+        second = catalog.build(ROOT, self.folder / "second")
         self.assertEqual({p.name: p.read_bytes() for p in self.paths}, {p.name: p.read_bytes() for p in second})
 
     def test_install_all_and_selected_preserve_other_files(self):
@@ -204,11 +204,8 @@ class ValidationTests(unittest.TestCase):
         shutil.copytree(ROOT / "codex", self.root / "codex")
         (self.root / "VERSION").write_text("0.1.0\n", encoding="utf-8")
 
-    def test_catalog_and_exact_tag(self):
-        self.assertEqual(len(catalog.validate(self.root, "v0.1.0")), 6)
-        for tag in ("0.1.0", "v0.1.1", "v00.1.0", "v0.1.0-rc.1", "v0.1.0extra", "v0.1.0\n"):
-            with self.subTest(tag=tag), self.assertRaises(ValueError):
-                catalog.validate(self.root, tag)
+    def test_catalog_without_tag(self):
+        self.assertEqual(len(catalog.validate(self.root)), 6)
 
     def test_invalid_version_is_rejected(self):
         (self.root / "VERSION").write_text("01.0.0", encoding="utf-8")

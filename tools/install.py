@@ -1,4 +1,4 @@
-"""Install selected skills from an extracted Skill Base Codex release (stdlib only)."""
+"""Install selected skills from an extracted Skill Base Codex bundle (stdlib only)."""
 
 from __future__ import annotations
 

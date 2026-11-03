@@ -8,7 +8,7 @@ O catálogo adapta fluxos do Xenogenesis sem depender de suas regras, tecnologia
 
 | Agente | Suporte |
 | --- | --- |
-| Codex | Disponível: seis skills, instalação e artefatos de release |
+| Codex | Disponível: seis skills, instalação e pacotes locais |
 | Claude | Estrutura reservada; ainda sem implementação |
 | GitHub Copilot | Estrutura reservada; ainda sem implementação |
 
@@ -47,7 +47,7 @@ cat SHA256SUMS
 unzip skill-base-codex-v0.1.0.zip -d extraido
 ```
 
-Os exemplos abaixo partem da pasta extraída `skill-base-codex-v0.1.0`, que contém `install.py`, `manifest.json` e `skills/`. Ajuste a versão e os caminhos ao pacote escolhido. As primeiras releases só estarão disponíveis depois de o mantenedor publicar uma tag no GitHub.
+Os exemplos abaixo partem da pasta extraída `skill-base-codex-v0.1.0`, que contém `install.py`, `manifest.json` e `skills/`. Ajuste a versão e os caminhos ao pacote escolhido. Você também pode gerar esses arquivos localmente com `python tools/package.py`, seguindo os requisitos de desenvolvimento abaixo.
 
 ### Instalação por projeto
 
@@ -134,7 +134,7 @@ Os modelos incluídos servem a projetos sem formato próprio. As skills não exi
 
 ## Versionamento e desenvolvimento
 
-`VERSION` define uma versão SemVer única para todo o catálogo, inicialmente `0.1.0`. Todos os ZIPs de uma release compartilham a versão. Mudanças incompatíveis em invocação, instalação ou comportamento exigem major; novas capacidades compatíveis, minor; correções, patch.
+`VERSION` define uma versão SemVer única para todo o catálogo, inicialmente `0.1.0`. Todos os ZIPs gerados compartilham a versão. Mudanças incompatíveis em invocação, instalação ou comportamento exigem major; novas capacidades compatíveis, minor; correções, patch.
 
 Estrutura: `codex/skills/` contém as skills; `claude/` e `github-copilot/` reservam suporte futuro; `tools/` contém validação, empacotamento e instalação; `tests/` contém testes das ferramentas e cenários de revisão.
 
@@ -147,8 +147,8 @@ python -m unittest discover -s tests -v
 python tools/package.py
 ```
 
-Os artefatos ficam em `dist/`, ignorado pelo Git. Para testar a instalação sem release publicada, extraia o ZIP gerado e siga os mesmos passos acima. Builds sem commit inicial registram `source_commit: "uncommitted"`; em releases, o manifesto registra o commit da tag. Os hashes identificam os bytes efetivamente empacotados.
+Os artefatos ficam em `dist/`, ignorado pelo Git. Extraia o ZIP gerado e siga os mesmos passos de instalação acima. O manifesto registra o commit do checkout utilizado, ou `source_commit: "uncommitted"` quando ainda não há commit. Os hashes identificam os bytes efetivamente empacotados.
 
-Uma tag enviada ao GitHub no formato exato `vX.Y.Z`, correspondente a `VERSION`, dispara validação e testes Windows/Linux antes da publicação. A release contém um ZIP completo, seis individuais, um manifesto externo e `SHA256SUMS`. Cada ZIP também inclui manifesto, licença, procedência e instalador. Claude e Copilot ficam fora dos pacotes.
+O empacotamento gera um ZIP completo, seis individuais, um manifesto externo e `SHA256SUMS`. Cada ZIP também inclui manifesto, licença, procedência e instalador. Claude e Copilot ficam fora dos pacotes.
 
-O workflow cria rascunho, anexa artefatos e publica após sucesso. Releases existentes não são sobrescritas. Veja [contribuição e publicação](CONTRIBUTING.md) e os [cenários de revisão das skills](tests/skill-scenarios.md).
+O CI executa as verificações em Windows/Linux nos pushes de branches, pull requests ou execução manual. Não há publicação automática por tags nem vínculo obrigatório entre tags e `VERSION`. Veja as [orientações de contribuição](CONTRIBUTING.md) e os [cenários de revisão das skills](tests/skill-scenarios.md).

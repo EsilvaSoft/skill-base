@@ -13,29 +13,18 @@ Cada skill é autocontida: `SKILL.md`, `agents/openai.yaml` e somente os modelos
 
 ## Versões
 
-`VERSION` é a única versão do catálogo, no formato `X.Y.Z`, sem zeros à esquerda. Todos os pacotes de uma release usam a mesma versão, mesmo quando apenas uma skill mudou. Incremente major para mudanças incompatíveis em nomes, instalação ou comportamento; minor para capacidades novas compatíveis; patch para correções. Essa política também se aplica à série `0.x`.
+`VERSION` é a única versão do catálogo, no formato `X.Y.Z`, sem zeros à esquerda. Todos os pacotes gerados usam a mesma versão, mesmo quando apenas uma skill mudou. Incremente major para mudanças incompatíveis em nomes, instalação ou comportamento; minor para capacidades novas compatíveis; patch para correções. Essa política também se aplica à série `0.x`.
 
-Atualize `VERSION` e `CHANGELOG.md` antes da tag. Preserve nomes de skills como interface pública; uma renomeação afeta invocações e pastas instaladas. Não inclua metadados de versão independentes em cada skill.
+Mantenha `VERSION` e `CHANGELOG.md` coerentes com as alterações do catálogo. Preserve nomes de skills como interface pública; uma renomeação afeta invocações e pastas instaladas. Não inclua metadados de versão independentes em cada skill.
 
-## Publicar
+## Pacotes locais e CI
 
-Após integrar e validar a alteração no GitHub, o mantenedor cria e envia uma tag, por exemplo:
-
-```sh
-git tag -a v0.1.0 -m "Skill Base 0.1.0"
-git push origin v0.1.0
-```
-
-O workflow confere a tag contra `VERSION`, executa os testes em Windows/Linux e gera os artefatos a partir do commit marcado. Cria um rascunho, anexa os arquivos e só então o publica. Tags inválidas ou divergentes falham antes da publicação. O token padrão do Actions precisa de `contents: write` no job de publicação.
-
-Uma release já publicada nunca é substituída pelo workflow. Em caso de falha durante o upload, o rascunho fica para inspeção; remova apenas o rascunho incompleto antes de repetir o job. Uma correção em conteúdo já publicado exige nova versão e nova tag. Não mova tags publicadas.
-
-Se uma falha na infraestrutura do workflow impedir a publicação antes de criar a release, corrija o workflow na branch padrão e use a execução manual **Validate and release**, informando a tag existente. A execução usa o workflow corrigido, mas faz checkout e valida o conteúdo da tag solicitada, sem movê-la:
+Gere os pacotes localmente quando precisar instalar ou compartilhar o catálogo:
 
 ```sh
-gh workflow run ci.yml --ref master -f tag=v0.1.0
+python tools/package.py
 ```
 
-Substitua `master` pela branch padrão efetiva do repositório. A execução manual mantém as mesmas verificações de versão, testes Windows/Linux e recusa de releases existentes.
+Os arquivos ficam em `dist/`, incluindo os ZIPs, o manifesto e `SHA256SUMS`. A versão vem de `VERSION`; a geração dos pacotes não depende de uma tag Git.
 
-O destino é obtido de `GITHUB_REPOSITORY`; o endereço documentado é `EsilvaSoft/skill-base`. A criação do remoto e o primeiro push são operações do mantenedor, separadas da implementação local.
+O workflow executa validação, testes e empacotamento em Windows/Linux nos pushes de branches, pull requests ou execução manual. Ele tem somente permissão de leitura e não publica no GitHub Releases. O projeto não define um fluxo de publicação automática.

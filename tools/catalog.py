@@ -1,4 +1,4 @@
-"""Validation and reproducible release bundles for the Codex catalog."""
+"""Validation and reproducible local bundles for the Codex catalog."""
 
 from __future__ import annotations
 
@@ -15,12 +15,10 @@ SEMVER = r"(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)"
 NAME = re.compile(r"skill-base-[a-z0-9]+(?:-[a-z0-9]+)*")
 
 
-def read_version(root: Path = ROOT, tag: str | None = None) -> str:
+def read_version(root: Path = ROOT) -> str:
     version = (root / "VERSION").read_text(encoding="utf-8").strip()
     if not re.fullmatch(SEMVER, version):
         raise ValueError(f"VERSION inválida: {version!r}")
-    if tag is not None and (not re.fullmatch("v" + SEMVER, tag) or tag != "v" + version):
-        raise ValueError(f"Tag {tag!r} deve ser exatamente v{version}")
     return version
 
 
@@ -51,8 +49,8 @@ def load_yaml(text: str):
         raise ValueError(f"YAML inválido: {error}") from error
 
 
-def validate(root: Path = ROOT, tag: str | None = None) -> list[Path]:
-    read_version(root, tag)
+def validate(root: Path = ROOT) -> list[Path]:
+    read_version(root)
     skills_root = root / "codex" / "skills"
     skills = sorted(p for p in skills_root.iterdir() if p.is_dir())
     if not skills:
@@ -122,9 +120,9 @@ def source_commit(root: Path) -> str:
     return result.stdout.strip() if result.returncode == 0 else "uncommitted"
 
 
-def build(root: Path = ROOT, output: Path | None = None, tag: str | None = None) -> list[Path]:
-    skills = validate(root, tag)
-    version = read_version(root, tag)
+def build(root: Path = ROOT, output: Path | None = None) -> list[Path]:
+    skills = validate(root)
+    version = read_version(root)
     output = (output or root / "dist").resolve()
     if output.is_relative_to((root / "codex/skills").resolve()):
         raise ValueError("Saída não pode estar dentro do catálogo")
